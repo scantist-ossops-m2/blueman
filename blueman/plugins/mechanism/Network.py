@@ -53,7 +53,7 @@ class Network(MechanismPlugin):
     def EnableNetwork(self, ip_address, netmask, dhcp_handler, caller):
         nc = NetConf.get_default()
         nc.set_ipv4(ip_address, netmask)
-        eval("nc.set_dhcp_handler(%s)" % dhcp_handler)
+        nc.set_dhcp_handler(globals()[dhcp_handler])
         nc.apply_settings()
 
     @dbus.service.method('org.blueman.Mechanism', in_signature="", out_signature="", sender_keyword="caller")
